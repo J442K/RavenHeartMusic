@@ -3,6 +3,7 @@ import Login from './Auth/Login.jsx'
 import Register from './Auth/Register.jsx'
 import { useAuthStore } from '../storeAuth'
 import { usePlayerStore } from '../store'
+import { supabase } from '../lib/supabase'
 
 export default function Header(){
   const [open, setOpen] = useState(false)
@@ -12,6 +13,7 @@ export default function Header(){
   const [tab, setTab] = useState('login')
   const user = useAuthStore(s => s.user)
   const signOut = useAuthStore(s => s.signOut)
+  const authEnabled = !!supabase
   const history = usePlayerStore(s => s.history)
   const playlist = usePlayerStore(s => s.playlist)
   const queue = usePlayerStore(s => s.queue)
@@ -40,10 +42,14 @@ export default function Header(){
         <button onClick={openCommandBar} className="px-3 py-1 bg-blood text-black font-black jagged hover-blood" style={{ borderRadius: '8px' }}>
           Search
         </button>
-        {user ? (
+        {user && authEnabled && (
           <button onClick={signOut} className="px-3 py-1 bg-blood text-black font-black jagged hover-blood" style={{ borderRadius: '8px' }}>Leave</button>
-        ) : (
+        )}
+        {!user && authEnabled && (
           <button onClick={()=>{ setShowAuth(true); setTab('login') }} className="px-3 py-1 bg-blood text-black font-black jagged hover-blood" style={{ borderRadius: '8px' }}>Enter</button>
+        )}
+        {!authEnabled && (
+          <span className="px-3 py-1 text-silver/70 border border-blood jagged" style={{ borderRadius: '8px' }} title="Auth disabled — add Supabase env vars to enable">Auth disabled</span>
         )}
         <button onClick={()=>setOpen(!open)} className="w-10 h-10 flex items-center justify-center bg-coal jagged hover-blood" style={{ borderRadius: '8px' }} aria-label="Menu">
           {open ? (

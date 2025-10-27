@@ -14,6 +14,11 @@ export default function Login({ onSuccess }) {
 
   const toEmail = (id) => id.includes('@') ? id : `${id}@noemail.ravenheart.local`
 
+  // Build a full redirect URL that respects GitHub Pages subpath.
+  // Vite injects BASE_URL at build-time (e.g., "/RavenHeartMusic/"); locally it's "/".
+  const appBase = (import.meta.env.BASE_URL || '/').replace(/\/+/g, '/')
+  const redirectTo = `${window.location.origin}${appBase}`
+
   const onSubmit = async ({ identifier, password }) => {
     if (!supabase) { alert('Auth not configured. Add Supabase env vars.'); return }
     const email = toEmail(identifier)
@@ -31,7 +36,7 @@ export default function Login({ onSuccess }) {
 
   const onGitHub = async () => {
     if (!supabase) { alert('Auth not configured. Add Supabase env vars.'); return }
-    const { error } = await supabase.auth.signInWithOAuth({ provider: 'github', options: { redirectTo: window.location.origin } })
+    const { error } = await supabase.auth.signInWithOAuth({ provider: 'github', options: { redirectTo } })
     if (error) {
       const msg = (error?.message || '').toLowerCase()
       const hint = msg.includes('provider not enabled') ? 'Enable GitHub provider in Supabase Auth.'
