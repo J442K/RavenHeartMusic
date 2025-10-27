@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>RavenHeartTunes • Redirecting…</title>
+    <style>
+      :root {
+        --coal: #0a0a0a;
+        --blood: #8b0000;
+        --silver: #b5b5b5;
+      }
+      html, body { height: 100%; }
+      body {
+        margin: 0;
+        background: var(--coal);
+        color: var(--silver);
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+      }
+      .wrap {
+        position: relative;
+        min-height: 100%;
+        display: grid;
+        place-items: center;
+      }
+      .card {
+        position: relative;
+        z-index: 1;
+        background: rgba(0,0,0,0.6);
+        border: 1px solid var(--blood);
+        border-radius: 10px;
+        padding: 20px 24px;
+        box-shadow: 0 0 8px rgba(139,0,0,0.5);
+      }
+      .brand {
+        font-weight: 800;
+        letter-spacing: 0.5px;
+        margin-bottom: 8px;
+      }
+      .hint { color: rgba(181,181,181,0.85); font-size: 14px; }
+      .tint {
+        position: fixed; inset: 0; z-index: 0;
+        background: rgba(139,0,0,0.10);
+        mix-blend-mode: soft-light;
+        pointer-events: none;
+      }
+      .bar {
+        height: 4px;
+        background: linear-gradient(to right, var(--blood), var(--coal));
+        border-radius: 3px;
+        box-shadow: inset 0 0 0 1px var(--blood);
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="tint" aria-hidden="true"></div>
+      <div class="card" role="status" aria-live="polite">
+        <div class="brand">RavenHeartTunes</div>
+        <div class="hint">Redirecting you to the app…</div>
+        <div class="bar"></div>
+      </div>
+    </div>
+    <script>
+      // GitHub Pages SPA fallback: redirect 404s to index.html within the same subpath
+      var params = new URLSearchParams(location.search || '')
+      var isPreview = params.has('preview') || params.has('stay') || params.get('redirect') === 'false'
+      var target = './index.html' + (location.search || '') + (location.hash || '')
+
+      // In preview mode, do not redirect so you can see styling
+      if (!isPreview) {
+        // Use a micro-delay to ensure styles render, while remaining instant for users
+        setTimeout(function(){ location.replace(target); }, 10)
+      } else {
+        // Show a tiny note in preview mode
+        var note = document.createElement('div')
+        note.textContent = 'Preview mode — no redirect. Use the app button or remove ?preview.'
+        note.style.marginTop = '10px'
+        note.style.fontSize = '12px'
+        note.style.color = 'rgba(181,181,181,0.75)'
+        document.querySelector('.card')?.appendChild(note)
+      }
+    </script>
+  </body>
+</html>

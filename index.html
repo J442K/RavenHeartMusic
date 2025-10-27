@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RavenHeartMusic</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Metal+Mania&family=Oswald:wght@400;600;800&display=swap" rel="stylesheet">
+    <script src="https://www.youtube.com/iframe_api" async></script>
+  </head>
+  <body class="bg-black text-silver font-oswald">
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+  <style>
+    :root{
+      --blood:#8b0000; --venom:#1f0040; --steel:#b5b5b5; --coal:#0a0a0a;
+    }
+    @keyframes crt-flicker { 0%,97% { opacity: 1 } 98% { opacity: 0.95 } 99.5% { opacity: 0.85 } 100% { opacity: 1 } }
+    @keyframes glitch {
+      0% { transform: translate(0); text-shadow: 0 0 1px var(--blood); }
+      20% { transform: translate(-1px, -0.5px) skewX(1deg); }
+      40% { transform: translate(1px, 0.5px) skewX(-1deg); }
+      60% { transform: translate(-1px, 0.5px); }
+      80% { transform: translate(1px, -0.5px); }
+      100% { transform: translate(0); }
+    }
+  </style>
+</html>

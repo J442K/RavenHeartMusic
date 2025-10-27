@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#050505"/>
+      <stop offset="1" stop-color="#0b0b0b"/>
+    </linearGradient>
+    <radialGradient id="vignette" cx="50%" cy="40%" r="60%">
+      <stop offset="0" stop-color="rgba(0,0,0,0)"/>
+      <stop offset="1" stop-color="rgba(0,0,0,0.7)"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1920" height="1080" fill="url(#bg)"/>
+  <rect width="1920" height="1080" fill="url(#vignette)"/>
+
+  <!-- Ground mist -->
+  <ellipse cx="960" cy="860" rx="680" ry="120" fill="#0f0f0f"/>
+
+  <!-- Crow-winged figure silhouette (centered) -->
+  <!-- Head -->
+  <circle cx="960" cy="420" r="44" fill="#1a1a1a"/>
+  <!-- Neck/shoulders -->
+  <path d="M920 470 Q960 485 1000 470 L1020 520 Q960 560 900 520 Z" fill="#1a1a1a"/>
+  <!-- Torso -->
+  <path d="M900 520 L1020 520 L1040 680 Q960 740 880 680 Z" fill="#1a1a1a"/>
+  <!-- Arms down -->
+  <path d="M900 560 L860 700 Q870 740 900 720 Z" fill="#1a1a1a"/>
+  <path d="M1020 560 L1060 700 Q1050 740 1020 720 Z" fill="#1a1a1a"/>
+  <!-- Legs -->
+  <path d="M900 680 L920 820 Q940 860 920 900 L880 900 Q860 860 880 820 Z" fill="#1a1a1a"/>
+  <path d="M1020 680 L1000 820 Q980 860 1000 900 L1040 900 Q1060 860 1040 820 Z" fill="#1a1a1a"/>
+
+  <!-- Left wing (spread) -->
+  <path d="M900 500 C 760 460 640 420 520 420 C 440 420 380 460 340 520 C 320 550 330 580 360 600 C 420 640 520 640 620 620 C 700 604 780 574 860 540"
+        fill="none" stroke="#3a3a3a" stroke-width="32" stroke-linecap="round"/>
+  <!-- Left feathers -->
+  <path d="M620 620 C 600 660 560 700 520 720" fill="none" stroke="#3a3a3a" stroke-width="26" stroke-linecap="round"/>
+  <path d="M700 604 C 680 650 640 690 600 710" fill="none" stroke="#3a3a3a" stroke-width="24" stroke-linecap="round"/>
+  <path d="M780 574 C 760 620 720 660 680 680" fill="none" stroke="#3a3a3a" stroke-width="22" stroke-linecap="round"/>
+
+  <!-- Right wing (spread) -->
+  <path d="M1020 500 C 1160 460 1280 420 1400 420 C 1480 420 1540 460 1580 520 C 1600 550 1590 580 1560 600 C 1500 640 1400 640 1300 620 C 1220 604 1140 574 1060 540"
+        fill="none" stroke="#3a3a3a" stroke-width="32" stroke-linecap="round"/>
+  <!-- Right feathers -->
+  <path d="M1300 620 C 1320 660 1360 700 1400 720" fill="none" stroke="#3a3a3a" stroke-width="26" stroke-linecap="round"/>
+  <path d="M1220 604 C 1240 650 1280 690 1320 710" fill="none" stroke="#3a3a3a" stroke-width="24" stroke-linecap="round"/>
+  <path d="M1140 574 C 1160 620 1200 660 1240 680" fill="none" stroke="#3a3a3a" stroke-width="22" stroke-linecap="round"/>
+
+  <!-- Subtle blood glow -->
+  <circle cx="960" cy="560" r="260" fill="none" stroke="#8b0000" stroke-width="10" opacity="0.35"/>
+</svg>

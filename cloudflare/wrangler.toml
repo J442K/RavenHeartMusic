@@ -1,0 +1,14 @@
+name = "ravenhearttunes-stream-gate"
+main = "worker.js"
+compatibility_date = "2024-10-01"
+
+[vars]
+SUPABASE_JWT_SECRET = "replace-me"
+B2_PRESIGN_ENDPOINT = "https://your-presign-service.example.com/presign"
+RAPIDAPI_PROXY_SECRET = "ec74fc60-b30a-11f0-b7b5-ff83edaf8fd0"
+RAPIDAPI_KEY = "optional-marketplace-key"
+MEDIA_TOKEN_ENDPOINT = "https://your-token-service.example.com/token"
+MEDIA_API_KEY = "replace-with-server-key"
+
+[[unsafe.metadata]]
+rate_limit = { period = 10, requests = 10 }
