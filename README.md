@@ -34,6 +34,28 @@ Dark-emotional single-page music site. Apple Music 30s previews + YouTube backgr
 - Put `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY` in `.env`.
 - Login/Register forms are in `src/components/Auth/` and wired via the header “Enter” button.
 
+### GitHub OAuth setup (works locally and on GitHub Pages)
+
+- In Supabase → Authentication → Settings:
+  - Site URL (for Pages): `https://j442k.github.io/RavenHeartMusic/`
+  - Additional Redirect URLs: `http://localhost:5173/`, `http://localhost:5174/`, `https://j442k.github.io/RavenHeartMusic/`
+  - Allowed Origins (CORS): `http://localhost:5173`, `http://localhost:5174`, `https://j442k.github.io`
+- In Supabase → Authentication → Providers → GitHub:
+  - Enable provider and paste your GitHub OAuth App Client ID/Secret.
+  - On GitHub, set Authorization callback URL to `https://<YOUR_PROJECT_REF>.supabase.co/auth/v1/callback`.
+- In the app, OAuth redirect automatically respects the Pages subpath using Vite’s `BASE_URL`:
+  - Local: returns to `http://localhost:5173/` (or `:5174/`)
+  - Pages: returns to `https://j442k.github.io/RavenHeartMusic/`
+
+### GitHub Pages deploy prerequisites
+
+- Repository Settings → Pages → Build and deployment → Source → `GitHub Actions`.
+- Repository Settings → Actions → General → Workflow permissions → `Read and write permissions`.
+- Add repository secrets for the build:
+  - `SUPABASE_URL` → your Supabase project URL
+  - `SUPABASE_ANON_KEY` → your Supabase anon key
+- Push to `main` or re-run the `Deploy to GitHub Pages` workflow.
+
 ### Security posture
 - Supabase returns short-lived access JWTs and long-lived refresh tokens. Prefer HttpOnly cookies for refresh on server stacks; the SPA client manages refresh automatically.
 - Do not expose raw FLAC URLs in the DOM.
@@ -118,6 +140,11 @@ wrangler secret put MEDIA_API_KEY
 - `src/utils/youtube.js` will try Google’s API key first if `VITE_YOUTUBE_API_KEY` is set.
 - If the key is missing or the request fails (e.g., 403), it falls back automatically to the Worker proxy at `/rapid/youtube/search`.
 - No RapidAPI secrets are ever shipped to the browser.
+
+### Pages base-path
+
+- The app auto-detects the GitHub Pages base path during CI (`/<repo-name>/`).
+- No `GHPAGES_BASE` secret is required; Vite’s `BASE_URL` is used for asset loading and OAuth redirect.
 
 ### Media Token Proxy
 
